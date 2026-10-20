@@ -20,8 +20,8 @@ It doesn't predict markets or tell you what to do. It tells you when you need to
 
 ## How it works
 
-1. **A Google Sheet holds your plan.** You enter a few assumptions: your starting balance, annual spending, retirement date, expected return, and any income (Social Security, pensions, part-time work). The sheet plays them forward year by year into a *predicted path*.
-2. **Tiller keeps your balances current.** It pulls account balances into the sheet automatically. (You can also enter balances by hand.)
+1. **A Google Sheet holds your plan.** You enter a few assumptions: your starting balance, annual spending, retirement date, expected return, and any retirement income streams (Social Security, pensions, part-time work). The sheet plays them forward year by year into a *predicted path*.
+2. **[Tiller](https://tiller.com) keeps your balances current.** It pulls account balances into the sheet automatically. (Tiller is a subscription service; if you don't want this obligation you can also enter balances by hand.)
 3. **The sheet compares actual to predicted.** It works out what percent of the predicted balance you actually have and turns that into a status.
 4. **A widget on your iPhone shows the result.** It reads one published tab of the sheet that holds only the percent and the status, never your dollar amounts.
 
