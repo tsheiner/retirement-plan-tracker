@@ -1,0 +1,17 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Office lock and temp files
+~$*
+.~lock.*#
+
+# Personal copies of the template (never commit your own numbers)
+*-personal.xlsx
+*-mine.xlsx
+private/
