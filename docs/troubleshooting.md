@@ -30,3 +30,8 @@ Tiller needs its Transactions, Categories and Balance History tabs. Undo the del
 
 ### Status stays green, but the Predicted Path runs out of money
 That's by design. Green means "on track for your plan." If the plan runs out at a certain age, revisit the assumptions, usually spending or income.
+
+### No likely-cause message appears
+- It only shows when the percent is more than 1% from 100%.
+- In the sheet, check the Widget tab's `message` row. If it's blank while you're more than 1% off, open **Extensions → Apps Script → Executions** to see the error. The usual causes are a missing or wrong `ANTHROPIC_API_KEY` in Script Properties, or no credit on the API account.
+- The script runs once a day. To run it now, pick `updateGapMessage` in the Apps Script editor and click **Run**.

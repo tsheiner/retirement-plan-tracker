@@ -2,7 +2,8 @@
 // https://github.com/tsheiner/retirement-plan-tracker
 //
 // Shows how your balance compares to your plan's predicted balance,
-// colored green, yellow, or red.
+// colored green, yellow, or red, plus a short likely cause when you're
+// more than 1% off the plan (if the optional gap message is set up).
 //
 // Setup: replace the URL below with the "Publish to web" CSV link for
 // the Widget tab of your sheet. Publish ONLY the Widget tab, never the
@@ -36,6 +37,18 @@ try {
   const value = w.addText(isNaN(pct) ? "--" : Math.round(pct * 100) + "%");
   value.textColor = Color.white();
   value.font = Font.boldSystemFont(40);
+
+  // Optional: a one-line likely cause when more than 1% from the plan.
+  // Written by apps-script/gap-message.gs; blank if that isn't set up.
+  const message = data.message || "";
+  if (message && !isNaN(pct) && Math.abs(pct - 1) > 0.01) {
+    w.addSpacer(4);
+    const note = w.addText(message);
+    note.textColor = Color.white();
+    note.font = Font.systemFont(11);
+    note.lineLimit = 4;
+    note.minimumScaleFactor = 0.8;
+  }
 } catch (e) {
   w.backgroundColor = new Color(GRAY);
   const err = w.addText("No data");
