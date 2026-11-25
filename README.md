@@ -24,6 +24,7 @@ It doesn't predict markets or tell you what to do. It tells you when you need to
 2. **[Tiller](https://tiller.com) keeps your balances current.** It pulls account balances into the sheet automatically. (Tiller is a subscription service; if you don't want this obligation you can also enter balances by hand.)
 3. **The sheet compares actual to predicted.** It works out what percent of the predicted balance you actually have and turns that into a status.
 4. **A widget on your iPhone shows the result.** It reads one published tab of the sheet that holds only the percent and the status, never your dollar amounts.
+5. **Optional: a likely cause.** When you're more than 1% off the plan, a small script in the sheet asks Claude once a day for one sentence on the most likely reason, and the widget shows it under the percent.
 
 ## Getting started
 
@@ -44,6 +45,7 @@ To do it by hand instead, follow the same steps in `SKILL.md`.
 | An iPhone with [Scriptable](https://apps.apple.com/app/scriptable/id1405459188) installed | Free |
 | [Tiller](https://tiller.com) to update balances automatically (optional) | About $99/yr after a free trial |
 | An AI agent that can edit Google Sheets (optional but recommended). In Claude, that's the Google Sheets connector. | Included with a paid plan |
+| A Claude API key, for the likely-cause message (optional) | Billed by use, typically well under $1/mo |
 
 ## What's in this repo
 
@@ -52,6 +54,7 @@ To do it by hand instead, follow the same steps in `SKILL.md`.
 | `SKILL.md` | The setup guide, written for an AI agent to follow with you |
 | `template/` | The blank Google Sheet template |
 | `widget/` | The Scriptable code for the iPhone widget |
+| `apps-script/` | The optional script that writes the likely-cause message |
 | `docs/` | How the model works, and troubleshooting |
 
 ## Disclaimer

@@ -45,12 +45,14 @@ Give a short overview so there are no surprises.
 | 6. Connect your balances | Person links accounts (Tiller); agent maps them | 15–30 min |
 | 7. Publish the widget data | Person | 5 min |
 | 8. Add the widget to your phone | Person | 10 min |
+| 9. Optional: add the gap message | Person | 10 min |
 
 Check what they have:
 
 - **A Google account.** The sheet lives in Google Sheets.
 - **An iPhone**, with the free [Scriptable](https://apps.apple.com/app/scriptable/id1405459188) app. (Android isn't supported yet.)
 - **Tiller (optional),** about $99/yr after a free trial, to update balances automatically. Without it, they'll type balances in by hand, maybe monthly.
+- **A Claude API key (optional),** from console.anthropic.com, for the gap message in Step 9. It's billed by use, typically well under $1 a month.
 - **About a year of spending history**, ideally. A spending tracker (Empower, Monarch, Tiller, a bank's export) helps a lot, but an estimate works too.
 
 Check your own capabilities and tell them what you found:
@@ -191,7 +193,7 @@ The phone reads one small tab, **Widget**, which holds just the percent and stat
 
 If nothing happens on Start publishing, the browser is likely blocking the confirmation popup. Open the sheet in a regular browser window and try again.
 
-**Agent:** open the link and confirm it returns two lines, `percent_of_predicted` and `status`, and nothing else.
+**Agent:** open the link and confirm it returns three lines, `percent_of_predicted`, `status` and `message`, and nothing else. `message` stays blank unless they set up Step 9.
 
 ---
 
@@ -207,7 +209,27 @@ If nothing happens on Start publishing, the browser is likely blocking the confi
 
 ---
 
-## Step 9: Explain how to live with it
+## Step 9 (optional): Add the gap message
+
+When the balance is more than 1% away from the plan, the widget can show one short sentence under the percent with the most likely cause, for example "Investments have returned less than the plan assumes." A small script in the sheet asks Claude once a day, and only when there's a gap.
+
+Explain before they decide:
+
+- **It needs a Claude API key** from console.anthropic.com. It's billed by use, typically well under $1 a month.
+- **Privacy.** The script sends the plan, account balances and a summary of transactions to Anthropic's API. The sentence it writes back has no dollar amounts, because the Widget tab is published.
+- **It's a likely cause, not a certainty or advice.**
+
+If they want it:
+
+1. **Person:** create an API key at console.anthropic.com. Keep it private, and don't paste it into the chat.
+2. **Person:** in the sheet, open **Extensions → Apps Script**. Replace the editor's contents with `apps-script/gap-message.gs` from this repo (the agent can give them the file) and click **Save**.
+3. **Person:** click **Project Settings** (the gear) → **Script Properties** → **Add script property**. Property: `ANTHROPIC_API_KEY`. Value: the key. Click **Save script properties**.
+4. **Person:** back in the **Editor**, pick `setup` in the function menu, click **Run**, and approve the permissions. Google warns that the app isn't verified because it's their own script; click **Advanced → Go to (project name)** to continue.
+5. **Agent:** read the Widget tab. If the percent is more than 1% from 100%, `message` should now hold a sentence. If it's within 1%, it stays blank, which is correct.
+
+---
+
+## Step 10: Explain how to live with it
 
 Close by making sure they know:
 
@@ -233,7 +255,7 @@ Close by making sure they know:
 | Income | One row per income stream | Person |
 | Planned Items | One row per dated one-time expense or inflow | Person |
 | Predicted Path | The plan played forward year by year, in plan-start dollars | Nobody, it's calculated |
-| Widget | `percent_of_predicted` and `status`; the only published tab | Nobody, it's calculated |
+| Widget | `percent_of_predicted`, `status` and `message`; the only published tab | Nobody: calculated, and `message` is written by the optional gap-message script |
 
 ### Model cell map
 

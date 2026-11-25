@@ -33,6 +33,12 @@ Your real account balances, though, are in actual dollars, which drift upward wi
 - **Percent of predicted** = Account balance ÷ Predicted balance.
 - **Status:** green at or above the **Green threshold**, red below the **Red threshold**, yellow in between.
 
+## The gap message (optional)
+
+When **Percent of predicted** is more than 1% from 100%, a script in the sheet (`apps-script/gap-message.gs`) runs once a day. It sends Claude the Model, Accounts, Income, Planned Items and Predicted Path tabs, each account's balance change since the plan start, and a summary of transactions since then. Claude replies with one sentence giving the most likely cause, which goes in the `message` row of the Widget tab. Within 1%, the message is cleared and Claude isn't called.
+
+It's an explanation of the gap, not a prediction or advice, and it never includes dollar amounts.
+
 ## Design choices
 
 - **Monitoring, not prediction.** The path uses a steady expected return. It doesn't try to forecast crashes; when one happens, the widget shows it, and what to do about it is a separate decision.
